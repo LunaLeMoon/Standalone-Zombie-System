@@ -1,4 +1,4 @@
-<h1>Standalone Zombie System [Synchronized]</h1>
+<h1>Modified Standalone Zombie System [Synchronized]</h1>
 
 <strong>Preview:</strong> https://youtu.be/JlaeB9JIKpc
 
