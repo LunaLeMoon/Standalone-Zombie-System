@@ -63,8 +63,8 @@ Citizen.CreateThread(function()
     for _, zone in pairs(InfectedZones) do
         local Blip = AddBlipForRadius(zone.x, zone.y, zone.z, zone.radius)
         SetBlipHighDetail(Blip, true)
-        SetBlipColour(Blip, 2)
-        SetBlipAlpha(Blip, 128)
+        SetBlipColour(Blip, 1) -- Red color for infected zones
+        SetBlipAlpha(Blip, 128) -- Translucent blip
     end
 
     while true do
@@ -87,7 +87,7 @@ Citizen.CreateThread(function()
                 end
 
                 Success, Zombie = FindNextPed(Handler)
-            until not Success
+            until not (Success)
 
             EndFindPed(Handler)
         end
@@ -177,52 +177,8 @@ Citizen.CreateThread(function()
             end
 
             Success, Zombie = FindNextPed(Handler)
-        until not (Success)
+        until not Success
 
         EndFindPed(Handler)
-    end
-end)
-
---[[ Infected Zones Configuration ]]--
-local InfectedZones = {
-    {x = 450.5966, y = -998.9636, z = 28.4284, radius = 80.0}, -- Example infected zone 1
-    {x = 1853.6666, y = 3688.0222, z = 33.2777, radius = 40.0}, -- Example infected zone 2
-    {x = -104.1444, y = 6469.3888, z = 30.6333, radius = 60.0} -- Example infected zone 3
-}
-
-Citizen.CreateThread(function()
-    --[[ Create Infected Zone Blips ]]--
-    for _, zone in pairs(InfectedZones) do
-        local Blip = AddBlipForRadius(zone.x, zone.y, zone.z, zone.radius)
-        SetBlipHighDetail(Blip, true)
-        SetBlipColour(Blip, 1)
-        SetBlipAlpha(Blip, 128)
-    end
-
-    while true do
-        Citizen.Wait(0)
-
-        --[[ Delete Zombies Outside Infected Zones ]]--
-        for _, zone in pairs(InfectedZones) do
-            local Zombie = -1
-            local Success = false
-            local Handler, Zombie = FindFirstPed()
-
-            repeat
-                if IsPedHuman(Zombie) and not IsPedAPlayer(Zombie) and not IsPedDeadOrDying(Zombie, true) then
-                    local pedcoords = GetEntityCoords(Zombie)
-                    local zonecoords = vector3(zone.x, zone.y, zone.z)
-                    local distance = #(zonecoords - pedcoords)
-
-                    if distance > zone.radius then
-                        DeleteEntity(Zombie)
-                    end
-                end
-
-                Success, Zombie = FindNextPed(Handler)
-            until not Success
-
-            EndFindPed(Handler)
-        end
     end
 end)
