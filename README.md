@@ -13,3 +13,5 @@ Special thanks to <a href="https://github.com/Dislaik">Dislaik</a> for the base 
 The SafeZones table and the code that creates blips for safe zones was removed, the code related to handling safe zones, including the loop that checks if a zombie is within a safe zone and deletes it was also removed.
 
 By removing these parts, I  eliminated the functionality related to safe zones and focused solely on the implementation of infected zones where zombies can spawn.
+
+This code iterates through the InfectedZones table and checks if a zombie is within each infected zone. If a zombie leaves the boundaries of the zone, it would de-spawn automatically.
