@@ -182,3 +182,5 @@ Citizen.CreateThread(function()
         EndFindPed(Handler)
     end
 end)
+
+-- end of script. Please submit a pull request if you wish to edit this script. cheers.  
